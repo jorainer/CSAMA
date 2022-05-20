@@ -1,0 +1,55 @@
+---
+title: "Metabolomics"
+author: "Johannes Rainer<br>Eurac Research, Bolzano, Italy<br>johannes.rainer@eurac.edu github/twitter: jotsetung"
+date: "24 June 2018"
+output: 
+  xaringan::moon_reader:
+    chakra: libs/remark-latest.min.js
+    self_contained: false
+---
+
+<style type="text/css">
+
+slides > slide:not(.nobackground):after {
+  content: '';
+}
+</style>
+
+# Content
+
+- Introduction to metabolomics
+- Preprocessing of LC-MS data in Bioconductor
+
+---
+
+# Metabolomics?
+
+--
+
+- Large-scale study of small molecules (metabolites) in a system (cell, tissue,
+  organism).
+
+- Metabolites: intermediates and products of cellular processes.
+
+--
+
+- Metabolome?
+  - **Genome**: what can happen.
+  - **Transcriptome**: what appears to be happening.
+  - **Proteome**: what makes it happen.
+  - **Metabolome**: what actually happened.
+
+--
+
+- Metabolome influenced by genetic **and** environmental factors.
+
+---
+
+## This is some random R test.
+
+- Some R code doing...
+```{r}
+a <- 4
+a
+```
+
