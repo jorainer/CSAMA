@@ -380,14 +380,26 @@ We gain an additional dimension:
 - LC-MS: analyze data along retention time.
 </div>
 
+## | **Liquid Chromatography Mass Spectrometry (LC-MS)** {.notransition}
+
+<div>
+<img src="images/LC-MS-drawing.gif" width = 700>
+</div>
+
 
 ## Mass Spectrometry Data {.build}
 
 ```{r, echo = FALSE, message = FALSE}
+## Run preprocessing on one file
 library(Spectra)
 library(xcms)
 fl <- system.file("mzML", "HighIS_Mix07_CE20_POS.mzML",
                   package = "MetaboAnnotationTutorials")
+std_data <- readMSData(fl, mode = "onDisk")
+cwp <- CentWaveParam(snthresh = 5, prefilter = c(3, 300), ppm = 40,
+                     peakwidth = c(2, 8), integrate = 2)
+std_data <- findChromPeaks(std_data, param = cwp)
+std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 ```
 
 <div>
@@ -512,6 +524,42 @@ fl <- system.file("mzML", "HighIS_Mix07_CE20_POS.mzML",
 <img src="images/correspondence2_03.png" height = 300>
 </div>
 
+## LC-MS data analysis {.notransition}
+
+<div>
+- Untargeted metabolomics (label-free proteomics).
+
+<div style="position:absolute; left:50px; top:270px;">
+<img src="images/mzR.png" width=100>
+</div>
+
+<div style="position:absolute; left:100px; top:183px;">
+<img src="images/MSnbase.png" width=100>
+</div>
+<div style="position:absolute; left:200px; top:183px;">
+<img src="images/xcms.png" width=100>
+</div>
+<div style="position:absolute; left:35%; top:220px;">
+- LC-MS preprocessing:
+  - chromatographic peak detection
+  - alignment
+  - correspondence
+</div>
+
+<div style="position:absolute; left:15%; top:60%; font-size:50%;">
+```{r, echo = FALSE, message = FALSE}
+npks <- nrow(chromPeaks(std_data))
+fts <- DataFrame(
+    mz = chromPeaks(std_data)[, "mz"],
+    rt = chromPeaks(std_data)[, "rt"],
+    sample_1 = chromPeaks(std_data)[, "into"],
+    sample_2 = abs(chromPeaks(std_data)[, "into"] + rnorm(npks, 70, 70)),
+    sample_3 = abs(chromPeaks(std_data)[, "into"] + rnorm(npks, 40, 70)),
+    sample_4 = abs(chromPeaks(std_data)[, "into"] + rnorm(npks, 90, 70)))
+rownames(fts) <- sub("CP", "FT", rownames(fts))
+fts
+```
+</div>
 
 ## But wait - what are we measuring?
 
