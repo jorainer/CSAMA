@@ -8,6 +8,10 @@ slides > slide {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   border-bottom: 3px solid #d04c29;
   color: #1e2b38;
+  width: 1024px;
+  height: 768px;
+  margin-left: -512px;
+  margin-top: -384px;
   /* padding: 20px 20px 30px 30px; */
   /* /\* color: #34495e; *\/ */
   /* background: #ffffff; */
@@ -18,8 +22,15 @@ slides > slide {
 /* The source code blocks */
 pre {
     font-size: 18px;
+    line-height: 19px;
     /* font-size: 90%; */
     /* font-family: 'Inconsolata', sans-serif; */
+}
+
+iframe {
+  height: 615px;
+  width: 100%;
+  margin-top: -45px;
 }
 
 h1 {
@@ -28,6 +39,7 @@ h1 {
 
 h2 {
     color: #d04c29;
+    letter-spacing: -2.5px;
 }
 
 h3 {
@@ -43,7 +55,7 @@ code {
     /* color: #446CB3; */
     color: rgb(80, 80, 80);
     background-color: rgb(230, 230, 230);
-    /* font-size: 90%; */
+    font-size: 90%;
     padding-left: 3px;
     padding-right: 3px;
 }
@@ -61,3 +73,23 @@ ul li::before {
     margin-left: -1em;
 }
 
+table {
+  border-collapse: collapse;
+  width: 65%;
+  font-size: 15px;
+}
+th, td {
+  padding: 0.1rem;
+  text-align: left;
+  border: 1px solid #ccc;
+}
+tbody tr:nth-child(odd) {
+  background: #eee;
+}
+
+pre.prettyprint+img, p+img {
+  margin: -10px 0px 20px 0px;
+}
+pre.prettyprint+pre {
+  margin-top:-20px;
+}
