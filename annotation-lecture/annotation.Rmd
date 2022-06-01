@@ -385,89 +385,95 @@ getSeq(gn, as(seqinfo(gn)["Y"], "GRanges"))
   sequences.
 
 
+## Online resources: `biomaRt` {.build}
 
-## Online resources: `biomaRt`
-
-CONTINUE
-
-The biomaRt package allows queries to an Ensembl Biomart server. We
-can see the choices of servers that we can use:
+- Biomart is an Ensembl service providing a web API to retrieve annotations.
+- Bioconductor's *biomaRt* package allows to query Ensembl Biomart servers.
 
 ```{r, warning = FALSE}
-
 library(biomaRt)
 listMarts()
-
 ```
 
-## biomaRt data sets
 
-And we can then check for the available data sets on a particular
-server.
+## *biomaRt* data sets {.build}
+
+- And we can then check for the available data sets on a particular
+  server.
 
 ```{r, warning = FALSE}
-
 mart <- useMart("ENSEMBL_MART_ENSEMBL")
-head(listDatasets(mart))
-
+listDatasets(mart) |> head()
 ```
 
-## biomaRt queries
+- We've got annotations for almost all species.
 
-After setting up a `mart` object pointing to the server and data set
-that we care about, we can make queries. We first set up the `mart` object.
+
+## *biomaRt* queries {.build}
+
+- Connect to a particular Biomart data set.
 
 ```{r, warning = FALSE}
-
 mart <- useMart("ENSEMBL_MART_ENSEMBL","hsapiens_gene_ensembl")
-
 ```
-Queries are of the form
 
-getBM(*attributes*, *filters*, *values*, *mart*)
+- Query the resource using `getBM(attributes, filters, values, mart`).
 
 where
 
-* attributes are the things we **want**
+- *attributes* are the things we **want**
+- *filters* are the *types of* IDs we **have**
+- *values* are the IDs we **have**
+- *mart* is the `mart` object we set up
 
-* filters are the *types of* IDs we **have**
 
-* values are the IDs we **have**
+## *biomaRt* attributes and filters {.build}
 
-* mart is the `mart` object we set up
-
-## biomaRt attributes and filters
-
-Both attributes and filters have rather inscrutable names, but a
-listing can be accessed using
+- Use `listAttributes` and `listFilters` to get available annotations and
+  supported filters.
 
 ```{r, warning = FALSE}
-
-atrib <- listAttributes(mart)
-filts <- listFilters(mart)
-head(atrib)
-head(filts)
-
-```
-
-## biomaRt query
-
-A simple example query
-
-```{r, warning = FALSE}
-
-afyids <- c("1000_at","1001_at","1002_f_at","1007_s_at")
-getBM(c("affy_hg_u95av2", "hgnc_symbol"), c("affy_hg_u95av2"), afyids, mart)
+listAttributes(mart) |> head()
+listFilters(mart) |> head()
 
 ```
 
 
-## What else?
+## *biomaRt* query {.build}
 
-- CompoundDb.
-- compound information/annotation.
-- fragment spectra data.
-- only if time permits...
+- Example: get Ensembl gene ID and chromosome names for two genes.
+
+```{r, warning = FALSE}
+sym <- c("BRCA1", "BRCA2")
+getBM(c("ensembl_gene_id", "hgnc_symbol", "chromosome_name"),
+      "hgnc_symbol", sym, mart)
+
+```
+
+<div>
+**Notes**
+
+- Requires internet connection.
+- By default uses *current* release, but `listEnsemblArchives()` would allow
+  to select URLs for previous (Ensembl) releases.
+</div>
+
+## What else? {.build}
+
+<div>
+- Annotations for **chemical compounds**.
+- Annotation resources: Human Metabolome Database (HMDB), PubChem, ChEBI,
+MassBank, MoNA, ...
+</div> 
+
+<div style="position:absolute; left:7%; top:40%;">
+<img src=images/CompoundDb.png width=200> 
+</div> 
+
+<div style="position:absolute;left:30%; top: 47.5%;">
+- Store compound annotations (mass, name, chemical formula etc).
+- Fragment spectra (structural information).
+</div>
 
 
 ## Last words {.build}
