@@ -141,13 +141,34 @@ knitr::include_graphics("images/Glycolysis_12.png")
 - Metabolome influenced by genetic **and** environmental factors.
 </div>
 
-## Influence from genetic factors
+## Influence from genetic factors {.build}
 
-- mGWAS
+- mGWAS result:
 
-## Environmental influence
+<div>
+<img src="images/SLC22A5.png" width = 400>
+</div>
 
-- Nutrition data.
+<div style="position:absolute; left:55%; top:20%;">
+<img src="images/Carnitine.png" width = 180/>
+<img src="images/Acetylcarnitine.png" width = 180/>
+<img src="images/butyrylcarnitine.png" width = 180/>
+</div>
+
+<div style="postition:absolute; left: 40px; top:85%;">
+- SLC22A5: carnitine transporter.
+</div>
+
+## Environmental influence {.build}
+
+<div>
+<img src="images/food_items-lm-coefficient-heatmap-1.png" width = 700>
+<div style="position:absolute; left: 40px; top:90%; font-size:50%; color:#808080;">
+Verri et al. MDPI Metabolites 2022.
+</div>
+</div>
+
+
 
 ## Metabolome is dynamic
 
@@ -158,7 +179,7 @@ knitr::include_graphics("images/Glycolysis_12.png")
 <div>
 - Blood (serum):
   - insights into general physiological state.
-  - venous blood/capillary blood.
+  - venous blood/capillary (arterial) blood.
 </div>
 <div>
 - Cell extracts:
@@ -563,7 +584,12 @@ fts
 
 ## But wait - what are we measuring?
 
-- feature characterized by m/z and retention time.
+
+<div style="position:absolute; left:15%; top:60%; font-size:50%;">
+```{r, echo = FALSE, message = FALSE}
+fts
+```
+</div>
 
 
 ## One step back: ionization {.build}
@@ -628,54 +654,133 @@ mtch <- matchValues(query, target,
 ```
 </div>
 
-## Still not that easy {.build}
+## A little additional complication {.build}
+
+<div>
+```{r, echo = FALSE, results = "asis"}
+pandoc.table(cmps, style = "rmarkdown")
+```
+<div style="position:absolute; left:5%; top:50%">
+- Compounds can have same formula - how to distinguish?
+</div>
+</div>
+
+## A little additional complication {.notransition}
 
 ```{r, echo = FALSE, results = "asis"}
 pandoc.table(cmps, style = "rmarkdown")
 ```
-
 <div style="position:absolute; left:5%; top:50%">
 - Compounds can have same formula - how to distinguish?
+- They differ by their structure.
 </div>
 
 <div style="position:absolute; left:150px; top:500px">
 <img src="images/caffeine.png" width = 150/>
 </div>
 
-<div style="position:absolute; left:400px; top:500px">
+<div style="position:absolute; left:500px; top:500px">
 <img src="images/enprofylline.png" width = 150/>
 </div>
 
-## Annotation using m/z and retention time
+## Using m/z **and** retention time {.build}
+
+- Structure can have an influence on the polarity of compounds and thus they
+  will separate in the LC: -> different retention time.
+- Annotation using m/z and retention time:
+
+<div>
+<div style="position:absolute; left:50px; top:400px;">
+<img src="images/MetaboAnnotation.png" width=100>
+</div>
+<div style="position:absolute; left:25%; top:425px;">
+```{r, eval = FALSE}
+mtch <- matchValues(query, target,
+                    Mass2MzRtParam(c("[M+H]+", "[M+Na]+")))
+```
+</div>
+</div>
+
+- Requires that we do have **reference** retention times available.
+
+## Using MS2 spectra {.build}
+
+- We can *fragment* ions to get some information on their structure:
+
+<div>
+<img src="images/fragment-spectra.png" width = 500>
+</div>
+
+## Using MS2 spectra {.build}
+
+- If we have MS2 spectra associated to features, we can match them against
+  reference spectra.
+
+```{r, echo = FALSE, message = FALSE}
+library(MsBackendMgf)
+sps <- Spectra("data/caffeine.mgf", source = MsBackendMgf())
+plotSpectraMirror(sps[1], sps[2], ppm = 70)
+```
+
+## Using MS2 spectra {.notransition}
+
+- If we have MS2 spectra associated to features, we can match them against
+  reference spectra.
+
+<div>
+<div style="position:absolute; left:50px; top:320px;">
+<img src="images/Spectra.png" width=100>
+</div>
+<div style="position:absolute; left:25%; top:345px;">
+```{r, eval = FALSE}
+simmat <- compareSpectra(a, b)
+```
+</div>
+</div>
+
+<div>
+<div style="position:absolute; left:50px; top:470px;">
+<img src="images/MetaboAnnotation.png" width=100>
+</div>
+<div style="position:absolute; left:25%; top:505px;">
+```{r, eval = FALSE}
+mtch <- matchSpectra(query, target,
+                     CompareSpectraParam())
+```
+</div>
+</div>
 
 
+## Using MS2 spectra {.notransition}
 
-## Annotation
+- If we have MS2 spectra associated to features, we can match them against
+  reference spectra.
 
-... slightly more complicated than for other omics.
+<div>
+<div style="position:absolute; left:50px; top:320px;">
+<img src="images/Spectra.png" width=100>
+</div>
+<div style="position:absolute; left:25%; top:355px;">
+```{r, eval = FALSE}
+simmat <- compareSpectra(a, b)
+```
+</div>
+</div>
 
-- m/z is not the mass.
-- assuming `[M+H]+` and `[M+Na]+` ions we could match m/z against reference
-  values.
-- `MetaboAnnotation`: `matchValues()`: need here an example from the
-  MetaboAnnotationTutorials?
-  
+<div>
+<div style="position:absolute; left:50px; top:470px;">
+<img src="images/MetaboAnnotation.png" width=100>
+</div>
+<div style="position:absolute; left:25%; top:490px;">
+```{r, eval = FALSE}
+mtch <- matchSpectra(query, target,
+                     CompareSpectraParam())
+```
+</div>
+</div>
 
-## Annotation
+- Problem: availability of reference spectra.
 
-- consider also retention time.
-
-
-## Annotation
-
-- What with the unknowns?
-- MS2 spectra: how are fragment spectra created?
-
-## Annotation
-
-- `MetaboAnnotation` `matchSpectra`.
-- ... still a lot to do. Comprehensive high quality reference
-  databases. Annotation software.
 
 ## Workshops
 
