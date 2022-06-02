@@ -58,11 +58,11 @@ rmdshot("metabolomics.Rmd", "metabolomics.pdf")
 
 - [Glycolysis](https://en.wikipedia.org/wiki/Glycolysis)
 
-```{r out.width = "700px", echo = FALSE}
+```{r out.width = "800px", echo = FALSE}
 knitr::include_graphics("images/Glycolysis_01.png")
 ```
 
-<div style="font-size: 80%;">
+<div style="font-size: 100%;">
 - Key metabolic pathway common to all cells.
 - Creates energy by converting glucose to pyruvate.
 <div>
@@ -71,7 +71,7 @@ knitr::include_graphics("images/Glycolysis_01.png")
 
 - [Glycolysis](https://en.wikipedia.org/wiki/Glycolysis)
 
-```{r out.width = "700px", echo = FALSE}
+```{r out.width = "800px", echo = FALSE}
 knitr::include_graphics("images/Glycolysis_02.png")
 ```
 
@@ -79,7 +79,7 @@ knitr::include_graphics("images/Glycolysis_02.png")
 
 - [Glycolysis](https://en.wikipedia.org/wiki/Glycolysis)
 
-```{r out.width = "700px", echo = FALSE}
+```{r out.width = "800px", echo = FALSE}
 knitr::include_graphics("images/Glycolysis_04.png")
 ```
 
@@ -87,7 +87,7 @@ knitr::include_graphics("images/Glycolysis_04.png")
 
 - [Glycolysis](https://en.wikipedia.org/wiki/Glycolysis)
 
-```{r out.width = "700px", echo = FALSE}
+```{r out.width = "800px", echo = FALSE}
 knitr::include_graphics("images/Glycolysis_06.png")
 ```
 
@@ -95,7 +95,7 @@ knitr::include_graphics("images/Glycolysis_06.png")
 
 - [Glycolysis](https://en.wikipedia.org/wiki/Glycolysis)
 
-```{r out.width = "700px", echo = FALSE}
+```{r out.width = "800px", echo = FALSE}
 knitr::include_graphics("images/Glycolysis_10.png")
 ```
 
@@ -103,7 +103,7 @@ knitr::include_graphics("images/Glycolysis_10.png")
 
 - [Glycolysis](https://en.wikipedia.org/wiki/Glycolysis)
 
-```{r out.width = "700px", echo = FALSE}
+```{r out.width = "800px", echo = FALSE}
 knitr::include_graphics("images/Glycolysis_11.png")
 ```
 
@@ -111,7 +111,7 @@ knitr::include_graphics("images/Glycolysis_11.png")
 
 - [Glycolysis](https://en.wikipedia.org/wiki/Glycolysis)
 
-```{r out.width = "700px", echo = FALSE}
+```{r out.width = "800px", echo = FALSE}
 knitr::include_graphics("images/Glycolysis_12.png")
 ```
 
@@ -123,7 +123,7 @@ knitr::include_graphics("images/Glycolysis_12.png")
   organism).
 
 <div>
-- Comparison of the different -omes:
+### Putting metabolomics into context:
 </div>
 <div>
   - **Genome**: what can happen.
@@ -138,7 +138,11 @@ knitr::include_graphics("images/Glycolysis_12.png")
   - **Metabolome**: what actually happened.
 </div>
 <div>
-- Metabolome influenced by genetic **and** environmental factors.
+### Properties of the metabolome:
+</div>
+<div>
+- Metabolome is highly dynamic.
+- Metabolome influenced by genetic *and* environmental factors.
 </div>
 
 ## Influence from genetic factors {.build}
@@ -146,33 +150,29 @@ knitr::include_graphics("images/Glycolysis_12.png")
 - mGWAS result:
 
 <div>
-<img src="images/SLC22A5.png" width = 400>
+<img src="images/SLC22A5.png" width = 500>
 </div>
 
-<div style="position:absolute; left:55%; top:20%;">
-<img src="images/Carnitine.png" width = 180/>
-<img src="images/Acetylcarnitine.png" width = 180/>
-<img src="images/butyrylcarnitine.png" width = 180/>
+<div style="position:absolute; left:55%; top:25%;">
+<img src="images/Carnitine.png" width = 200/>
+<img src="images/Acetylcarnitine.png" width = 200/>
+<img src="images/butyrylcarnitine.png" width = 200/>
 </div>
 
-<div style="postition:absolute; left: 40px; top:85%;">
+<div style="postition:absolute; left: 40px; top:90%;">
 - SLC22A5: carnitine transporter.
 </div>
+
 
 ## Environmental influence {.build}
 
 <div>
-<img src="images/food_items-lm-coefficient-heatmap-1.png" width = 700>
-<div style="position:absolute; left: 40px; top:90%; font-size:50%; color:#808080;">
-Verri et al. MDPI Metabolites 2022.
+<img src="images/food_items-lm-coefficient-heatmap-1.png" width = 800>
+<div style="position:absolute; left: 40px; top:95%; font-size:70%; color:#808080;">
+[Verri et al. MDPI Metabolites 2022. DOI: 10.3390/metabo12030205](https://doi.org/10.3390/metabo12030205)
 </div>
 </div>
 
-
-
-## Metabolome is dynamic
-
-- Important for experimental planning.
 
 ## Where can we measure metabolites? {.build}
 
@@ -206,7 +206,7 @@ Verri et al. MDPI Metabolites 2022.
 </div>
 
 <div>
-- Targeted/untargeted metabolomics:
+### Two main setups to measure metabolites:
 </div>
 <div>
   - **targeted**: quantitative measurement of selected metabolites.
@@ -250,7 +250,7 @@ knitr::include_graphics("images/Spectrum1_mod.png")
 <div>
 - Sample is dissolved in a fluid (mobile phase).
 
-<div style="position:absolute; top:75%;left:25%">
+<div style="position:absolute; top:60%;left:25%">
 ```{r out.width = "500px", echo = FALSE}
 knitr::include_graphics("images/LC_01.png")
 ```
@@ -263,7 +263,7 @@ knitr::include_graphics("images/LC_01.png")
 
 - Mobile phase carries analytes through column (stationary phase).
 
-<div style="position:absolute; top:75%;left:25%">
+<div style="position:absolute; top:60%;left:25%">
 ```{r out.width = "500px", echo = FALSE}
 knitr::include_graphics("images/LC_02.png")
 ```
@@ -278,7 +278,7 @@ knitr::include_graphics("images/LC_02.png")
 
 - Separation based on affinity for the column's stationary phase.
 
-<div style="position:absolute; top:75%;left:25%">
+<div style="position:absolute; top:60%;left:25%">
 ```{r out.width = "500px", echo = FALSE}
 knitr::include_graphics("images/LC_03.png")
 ```
@@ -299,7 +299,7 @@ knitr::include_graphics("images/LC_03.png")
   [HILIC](https://en.wikipedia.org/wiki/Hydrophilic_interaction_chromatography)
   (hyrophilic liquid interaction chromatography)
 
-<div style="position:absolute; top:75%;left:25%">
+<div style="position:absolute; top:60%;left:25%">
 ```{r out.width = "500px", echo = FALSE}
 knitr::include_graphics("images/LC_03.png")
 ```
@@ -404,7 +404,7 @@ We gain an additional dimension:
 ## | **Liquid Chromatography Mass Spectrometry (LC-MS)** {.notransition}
 
 <div>
-<img src="images/LC-MS-drawing.gif" width = 700>
+<img src="images/LC-MS-drawing.gif" width = 900>
 </div>
 
 
@@ -645,9 +645,9 @@ pandoc.table(cmps[1, ], style = "rmarkdown")
 </div>
 
 <div style="position:absolute; left:50px; top:450px;">
-<img src="images/MetaboAnnotation.png" width=100>
+<img src="images/MetaboAnnotation.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:475px;">
+<div style="position:absolute; left:25%; top:492px;">
 ```{r, eval = FALSE}
 mtch <- matchValues(query, target,
                     Mass2MzParam(c("[M+H]+", "[M+Na]+")))
@@ -691,9 +691,9 @@ pandoc.table(cmps, style = "rmarkdown")
 
 <div>
 <div style="position:absolute; left:50px; top:400px;">
-<img src="images/MetaboAnnotation.png" width=100>
+<img src="images/MetaboAnnotation.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:425px;">
+<div style="position:absolute; left:25%; top:443px;">
 ```{r, eval = FALSE}
 mtch <- matchValues(query, target,
                     Mass2MzRtParam(c("[M+H]+", "[M+Na]+")))
