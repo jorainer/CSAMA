@@ -161,13 +161,16 @@ knitr::include_graphics("images/Glycolysis_12.png")
 
 <div style="postition:absolute; left: 40px; top:90%;">
 - SLC22A5: carnitine transporter.
+- Genetic variant in this gene has influence on its function.
 </div>
 
 
 ## Environmental influence {.build}
 
+- Relationship metabolites and dietary habits,
+
 <div>
-<img src="images/food_items-lm-coefficient-heatmap-1.png" width = 800>
+<img src="images/food_items-lm-coefficient-heatmap-1.png" width = 750>
 <div style="position:absolute; left: 40px; top:95%; font-size:70%; color:#808080;">
 [Verri et al. MDPI Metabolites 2022. DOI: 10.3390/metabo12030205](https://doi.org/10.3390/metabo12030205)
 </div>
@@ -307,7 +310,7 @@ knitr::include_graphics("images/LC_03.png")
 
 
 <!-- Now comes the incremental LC-MS description -->
-## | **Liquid Chromatography Mass Spectrometry (LC-MS)** {.notransition}
+## | **Mass Spectrometry (MS)** {.notransition}
 
 ```{r out.width = "700px", echo = FALSE}
 knitr::include_graphics("images/MS_Spectrum1.png")
@@ -424,7 +427,7 @@ std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 ```
 
 <div>
-- mzML files.
+- Data stored in *mzML* files.
 </div>
 
 <div style="position:absolute; left:50px; top:270px;">
@@ -632,7 +635,7 @@ pandoc.table(cmps[1, ], style = "rmarkdown")
 - Electro spray ionization: create ions, potentially multiple.
 </div>
 
-## One step back: ionization {.notransition}
+## Annotation using *m/z* values {.notransition}
 
 ```{r, echo = FALSE, results = "asis"}
 pandoc.table(cmps[1, ], style = "rmarkdown")
@@ -653,6 +656,7 @@ mtch <- matchValues(query, target,
                     Mass2MzParam(c("[M+H]+", "[M+Na]+")))
 ```
 </div>
+
 
 ## A little additional complication {.build}
 
@@ -683,7 +687,7 @@ pandoc.table(cmps, style = "rmarkdown")
 <img src="images/enprofylline.png" width = 150/>
 </div>
 
-## Using m/z **and** retention time {.build}
+## Using *m/z* **and** retention time {.build}
 
 - Structure can have an influence on the polarity of compounds and thus they
   will separate in the LC: -> different retention time.
@@ -703,18 +707,25 @@ mtch <- matchValues(query, target,
 
 - Requires that we do have **reference** retention times available.
 
+
 ## Using MS2 spectra {.build}
 
+<div>
 - We can *fragment* ions to get some information on their structure:
+</div>
 
 <div>
 <img src="images/fragment-spectra.png" width = 500>
 </div>
 
+<div>
+- LC-MS/MS data: MS1 for quantification, MS2 for annotation.
+</div>
+
 ## Using MS2 spectra {.build}
 
 - If we have MS2 spectra associated to features, we can match them against
-  reference spectra.
+  *reference* spectra.
 
 ```{r, echo = FALSE, message = FALSE}
 library(MsBackendMgf)
@@ -725,13 +736,13 @@ plotSpectraMirror(sps[1], sps[2], ppm = 70)
 ## Using MS2 spectra {.notransition}
 
 - If we have MS2 spectra associated to features, we can match them against
-  reference spectra.
+  *reference* spectra.
 
 <div>
-<div style="position:absolute; left:50px; top:320px;">
-<img src="images/Spectra.png" width=100>
+<div style="position:absolute; left:50px; top:300px;">
+<img src="images/Spectra.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:345px;">
+<div style="position:absolute; left:25%; top:358px;">
 ```{r, eval = FALSE}
 simmat <- compareSpectra(a, b)
 ```
@@ -740,9 +751,9 @@ simmat <- compareSpectra(a, b)
 
 <div>
 <div style="position:absolute; left:50px; top:470px;">
-<img src="images/MetaboAnnotation.png" width=100>
+<img src="images/MetaboAnnotation.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:505px;">
+<div style="position:absolute; left:25%; top:513px;">
 ```{r, eval = FALSE}
 mtch <- matchSpectra(query, target,
                      CompareSpectraParam())
@@ -754,13 +765,13 @@ mtch <- matchSpectra(query, target,
 ## Using MS2 spectra {.notransition}
 
 - If we have MS2 spectra associated to features, we can match them against
-  reference spectra.
+  *reference* spectra.
 
 <div>
-<div style="position:absolute; left:50px; top:320px;">
-<img src="images/Spectra.png" width=100>
+<div style="position:absolute; left:50px; top:300px;">
+<img src="images/Spectra.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:355px;">
+<div style="position:absolute; left:25%; top:358px;">
 ```{r, eval = FALSE}
 simmat <- compareSpectra(a, b)
 ```
@@ -769,9 +780,9 @@ simmat <- compareSpectra(a, b)
 
 <div>
 <div style="position:absolute; left:50px; top:470px;">
-<img src="images/MetaboAnnotation.png" width=100>
+<img src="images/MetaboAnnotation.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:490px;">
+<div style="position:absolute; left:25%; top:513px;">
 ```{r, eval = FALSE}
 mtch <- matchSpectra(query, target,
                      CompareSpectraParam())
@@ -782,9 +793,27 @@ mtch <- matchSpectra(query, target,
 - Problem: availability of reference spectra.
 
 
-## Workshops
+## Workshops {.build}
 
 - Preprocessing: metabolomics2018.
-- `SpectraTutorials`
-- `MetaboAnnotationTutorials`
+
+<div>
+<div style="position:absolute; left:70px; top:230px;">
+<img src="images/Spectra.png" width=140>
+</div>
+<div style="position:absolute; left:25%; top:279px;">
+`SpectraTutorials`: introduction to MS data handling and processing using
+`Spectra`.
+</div>
+</div>
+
+<div>
+<div style="position:absolute; left:70px; top:400px;">
+<img src="images/MetaboAnnotation.png" width=140>
+</div>
+<div style="position:absolute; left:25%; top:452px;">
+`MetaboAnnotationTutorials`: annotation of untargeted metabolomics data.
+</div>
+</div>
+
 
