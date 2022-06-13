@@ -147,7 +147,7 @@ knitr::include_graphics("images/Glycolysis_12.png")
 
 ## Influence from genetic factors {.build}
 
-- mGWAS result:
+- mGWAS: associations between genetic variants and metabolite concentrations.
 
 <div>
 <img src="images/SLC22A5.png" width = 500>
@@ -167,7 +167,7 @@ knitr::include_graphics("images/Glycolysis_12.png")
 
 ## Environmental influence {.build}
 
-- Relationship metabolites and dietary habits,
+- Relationship between metabolite concentrations and dietary habits.
 
 <div>
 <img src="images/food_items-lm-coefficient-heatmap-1.png" width = 750>
@@ -243,7 +243,7 @@ knitr::include_graphics("images/Spectrum1_mod.png")
 
 <div style="position:absolute; top:65%;left:7%">
 > - **Problem:** unable to distinguish between metabolites with the same/similar 
-    mass-to-charge ratio (m/z).
+    mass-to-charge ratio (*m/z*).
 > - **Solution:** additional separation of metabolites prior to MS.
 </div>
 
@@ -585,8 +585,21 @@ fts
 ```
 </div>
 
-## But wait - what are we measuring?
+## But wait - what are we actually measuring?
 
+
+<div style="position:absolute; left:15%; top:60%; font-size:50%;">
+```{r, echo = FALSE, message = FALSE}
+fts
+```
+</div>
+
+
+## But wait - what are we actually measuring?
+
+
+- *LC-MS features* characterized by their *m/z* and retention time.
+- Need to *annotate* these to metabolites (compounds).
 
 <div style="position:absolute; left:15%; top:60%; font-size:50%;">
 ```{r, echo = FALSE, message = FALSE}
@@ -644,7 +657,7 @@ pandoc.table(cmps[1, ], style = "rmarkdown")
 <div style="position:absolute; left:5%; top:40%">
 - Molecule not charged. Can not be detected with MS.
 - Electro spray ionization: create ions, potentially multiple.
-- Match measured m/z against these reference values.
+- Match measured *m/z* against these reference values.
 </div>
 
 <div style="position:absolute; left:50px; top:450px;">
@@ -691,7 +704,7 @@ pandoc.table(cmps, style = "rmarkdown")
 
 - Structure can have an influence on the polarity of compounds and thus they
   will separate in the LC: -> different retention time.
-- Annotation using m/z and retention time:
+- Annotation using *m/z* and retention time:
 
 <div>
 <div style="position:absolute; left:50px; top:400px;">
@@ -719,8 +732,12 @@ mtch <- matchValues(query, target,
 </div>
 
 <div>
+- Apply *collision energy* to fragment ions.
+</div>
+<div>
 - LC-MS/MS data: MS1 for quantification, MS2 for annotation.
 </div>
+
 
 ## Using MS2 spectra {.build}
 
@@ -795,15 +812,16 @@ mtch <- matchSpectra(query, target,
 
 ## Workshops {.build}
 
-- Preprocessing: metabolomics2018.
+- Preprocessing:
+  [metabolomics2018](https://github.com/jorainer/metabolomics2018).
 
 <div>
 <div style="position:absolute; left:70px; top:230px;">
 <img src="images/Spectra.png" width=140>
 </div>
 <div style="position:absolute; left:25%; top:279px;">
-`SpectraTutorials`: introduction to MS data handling and processing using
-`Spectra`.
+[`SpectraTutorials`](https://github.com/jorainer/SpectraTutorials): 
+introduction to MS data handling and processing using `Spectra`.
 </div>
 </div>
 
@@ -812,7 +830,8 @@ mtch <- matchSpectra(query, target,
 <img src="images/MetaboAnnotation.png" width=140>
 </div>
 <div style="position:absolute; left:25%; top:452px;">
-`MetaboAnnotationTutorials`: annotation of untargeted metabolomics data.
+[`MetaboAnnotationTutorials`](https://github.com/jorainer/MetaboAnnotationTutorials): 
+annotation of untargeted metabolomics data.
 </div>
 </div>
 
