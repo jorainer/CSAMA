@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Bioconductor Annotation Resources"
 author: "Johannes Rainer <johannes.rainer@eurac.edu> <br> Lori Shepherd  <Lori.Shepherd@roswellpark.org> <br> Martin Morgan <Martin.Morgan@RoswellPark.org> <br> James W. MacDonald"
-date: 22-26 July | CSAMA 2022
+date: 19-24 June | CSAMA 2022
 output:
   ioslides_presentation:
     fig_retina: null
@@ -92,7 +92,7 @@ knitr::include_graphics("images/RR-sketch-04.png")
 - add HUGO gene symbols to RNA-Seq results.
 </div>
 <div>
-- determine in which biological pathways genes are involved.
+- map genes to biological pathways.
 </div>
 <div>
 - assign peptide sequences to proteins.
@@ -101,7 +101,7 @@ knitr::include_graphics("images/RR-sketch-04.png")
 - identify metabolites based on fragment spectra.
 </div>
 <div>
-- **Annotation**: map one type of IDs to another type of ID.
+- **Annotation**: map one type of ID to another type of ID.
 </div>
 
 
@@ -132,7 +132,9 @@ knitr::include_graphics("images/RR-sketch-04.png")
 <div>
 - Annotation packages: 
   - *org.Hs.eg.db*
-  - *BSgenome.Hsapiens.UCSC.hg19* 
+  - *BSgenome.Hsapiens.UCSC.hg19*
+  - *TxDb.Hsapiens.UCSC.hg19.knownGene*
+  - *GO.db*
   - ...
 </div>
 <div>
@@ -152,6 +154,12 @@ library(org.Hs.eg.db)
 org.Hs.eg.db
 ```
 
+
+## 
+
+<div style="position:absolute; top:45%">
+**How can we get access to the data in a Bioconductor annotation resource?**
+</div>
 
 ## | **A common annotation interface:** *AnnotationDbi*
 
@@ -185,7 +193,7 @@ select(org.Hs.eg.db, ids, "SYMBOL", "ENSEMBL")
 ```
 
 
-## What annotation is provided? {.build}
+## What annotations are provided? {.build}
 
 - Use `columns` to list annotations available in specific annotation object.
 
@@ -273,12 +281,12 @@ mapIds(org.Hs.eg.db, brca, "OMIM", "SYMBOL", multiVals = "CharacterList")
 <div>
 - `TxDb` (*GenomicFeatures* package) and `EnsDb` (*ensembldb* package) objects
   contain positional annotations. 
-- `EnsDb` contain additional annotations such as gene symbols, Entrezgene IDs
-  and protein annotations.
+- `EnsDb` contain additional annotations such as gene symbols, Entrezgene IDs,
+  GC content, gene/transcript biotypes and protein annotations.
 </div>
 <div>
 - `TxDb` and `EnsDb` resources can be installed as packages
-  (e.g. *EnsDb.Hsapiens.v86*).
+  (e.g. *TxDb.Hsapiens.UCSC.hg19.knownGene*, *EnsDb.Hsapiens.v86*).
 - Preferred way: through *AnnotationHub*.
 </div>
 <div>
@@ -352,7 +360,7 @@ exs
 ## Genomic sequences {.build}
 
 <div>
-- *BSgenome* packages.
+- *BSgenome* packages (e.g. *BSgenome.Hsapiens.UCSC.hg19*).
 </div>
 <div>
 - *AnnotationHub*:
@@ -385,7 +393,7 @@ getSeq(gn, as(seqinfo(gn)["Y"], "GRanges"))
   sequences.
 
 
-## Online resources: `biomaRt` {.build}
+## Online resources: *biomaRt* {.build}
 
 - Biomart is an Ensembl service providing a web API to retrieve annotations.
 - Bioconductor's *biomaRt* package allows to query Ensembl Biomart servers.
@@ -417,7 +425,7 @@ listDatasets(mart) |> head()
 mart <- useMart("ENSEMBL_MART_ENSEMBL","hsapiens_gene_ensembl")
 ```
 
-- Query the resource using `getBM(attributes, filters, values, mart`).
+- Query the resource using `getBM(attributes, filters, values, mart)`.
 
 where
 
@@ -462,8 +470,11 @@ getBM(c("ensembl_gene_id", "hgnc_symbol", "chromosome_name"),
 
 <div>
 - Annotations for **chemical compounds**.
-- Annotation resources: Human Metabolome Database (HMDB), PubChem, ChEBI,
-MassBank, MoNA, ...
+- Annotation resources: [Human Metabolome Database (HMDB)](https://hmdb.ca), 
+  [PubChem](https://pubchem.ncbi.nlm.nih.gov/),
+  [ChEBI](https://www.ebi.ac.uk/chebi/), 
+  [MassBank](https://massbank.eu/MassBank/), 
+  [MoNA](https://mona.fiehnlab.ucdavis.edu/), ...
 </div> 
 
 <div style="position:absolute; left:7%; top:40%;">
@@ -479,8 +490,7 @@ MassBank, MoNA, ...
 ## Last words {.build}
 
 <div>
-- Stick wherever possible with one annotation resource (Ensembl, NCBI,
-  UCSC).
+- Stick whenever possible with one annotation resource (Ensembl, NCBI, UCSC).
 </div>
 <div>
 - Ensure you're using the same annotation version through your full analysis
@@ -489,4 +499,11 @@ MassBank, MoNA, ...
 <div>
 - Prefer *AnnotationHub* over annotation packages: better control of the
   annotation version.
+</div>
+
+
+## 
+
+<div style="position:absolute; top:45%; left:25%;">
+**Thank you for your attention**
 </div>
