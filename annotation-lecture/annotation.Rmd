@@ -161,19 +161,21 @@ org.Hs.eg.db
 **How can we get access to the data in a Bioconductor annotation resource?**
 </div>
 
-## | **A common annotation interface:** *AnnotationDbi*
+## | **A common annotation interface:** *AnnotationDbi* {.build}
 
+<div>
 The main function is `select`:
 
 AnnotationDbi::select(*annopkg*, *keys*, *columns*, *keytype*)
-
+</div>
+<div>
 Where
 
 - *annopkg* is the annotation package (or object)
 - *keys* are the IDs that we **have**
 - *columns* are the values we **want**
 - *keytype* is the type of key used
-
+</div>
 
 ## Simple Example {.build}
 
@@ -187,7 +189,7 @@ Where
 ```{r, warning=FALSE}
 library(airway)
 data(airway)
-ids = head(rownames(airway))
+ids <- head(rownames(airway))
 ids
 select(org.Hs.eg.db, ids, "SYMBOL", "ENSEMBL")
 ```
@@ -276,7 +278,7 @@ mapIds(org.Hs.eg.db, brca, "OMIM", "SYMBOL", multiVals = "CharacterList")
 </div>
 
 
-## `TxDb` and `EnsDb` objects {.build}
+## | Positional annotations: `TxDb` and `EnsDb` objects {.build}
 
 <div>
 - `TxDb` (*GenomicFeatures* package) and `EnsDb` (*ensembldb* package) objects
@@ -368,7 +370,6 @@ exs
 
 ```{r}
 query(ah, c("TwoBitFile", "GRCh38"))
-gn <- ah[["AH49723"]]
 ```
 
 ## Extracting transcript sequences {.build}
@@ -376,17 +377,19 @@ gn <- ah[["AH49723"]]
 - Get sequences for previously extracted transcripts.
 
 ```{r}
+gn <- ah[["AH49723"]]
 extractTranscriptSeqs(gn, exs)
 ```
 
 ## Extracting genomic sequences {.build}
 
-- Get the genomic sequence for the *Y* chromosome. 
+- Get the genomic sequence for a particular region. 
 - `getSeq` takes the data object and a `GRanges` defining which (sub)sequence to
   extract.
 
 ```{r}
-getSeq(gn, as(seqinfo(gn)["Y"], "GRanges"))
+rng <- GRanges("X:10000-15000")
+getSeq(gn, rng)
 ```
 
 - See *Biostrings* package for more information on how to handle and process
@@ -403,6 +406,11 @@ library(biomaRt)
 listMarts()
 ```
 
+- Connect to a Biomart server.
+
+```{r, warning = FALSE}
+mart <- useMart("ENSEMBL_MART_ENSEMBL")
+```
 
 ## *biomaRt* data sets {.build}
 
@@ -410,7 +418,6 @@ listMarts()
   server.
 
 ```{r, warning = FALSE}
-mart <- useMart("ENSEMBL_MART_ENSEMBL")
 listDatasets(mart) |> head()
 ```
 
@@ -477,6 +484,7 @@ getBM(c("ensembl_gene_id", "hgnc_symbol", "chromosome_name"),
   [MoNA](https://mona.fiehnlab.ucdavis.edu/), ...
 </div> 
 
+<div>
 <div style="position:absolute; left:7%; top:40%;">
 <img src=images/CompoundDb.png width=200> 
 </div> 
@@ -485,7 +493,7 @@ getBM(c("ensembl_gene_id", "hgnc_symbol", "chromosome_name"),
 - Store compound annotations (mass, name, chemical formula etc).
 - Fragment spectra (structural information).
 </div>
-
+</div>
 
 ## Last words {.build}
 
