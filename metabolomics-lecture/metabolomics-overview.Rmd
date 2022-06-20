@@ -150,16 +150,20 @@ knitr::include_graphics("images/Glycolysis_12.png")
 - mGWAS: associations between genetic variants and metabolite concentrations.
 
 <div>
-<img src="images/SLC22A5.png" width = 500>
+<img src="images/SLC22A5.png" width = 450>
 </div>
 
 <div style="position:absolute; left:55%; top:25%;">
-<img src="images/Carnitine.png" width = 200/>
-<img src="images/Acetylcarnitine.png" width = 200/>
-<img src="images/butyrylcarnitine.png" width = 200/>
+<img src="images/Carnitine.png" width = 190/>
+<img src="images/Acetylcarnitine.png" width = 190/>
+<img src="images/butyrylcarnitine.png" width = 190/>
 </div>
 
-<div style="postition:absolute; left: 40px; top:90%;">
+<div>
+- Significant association between variant and carnitine, acetylcarnitine and
+  butyrylcarnitine.
+</div>
+<div>
 - SLC22A5: carnitine transporter.
 - Genetic variant in this gene has influence on its function.
 </div>
@@ -193,7 +197,7 @@ knitr::include_graphics("images/Glycolysis_12.png")
   - what did cells *consume*?
 </div>
 <div>
-- Other: urine, food, soil, water (environmental sciences) ...
+- Other: plants, urine, food, soil, water (environmental sciences) ...
 </div>
 
 ## How can we measure metabolites? {.build}
@@ -399,7 +403,6 @@ We gain an additional dimension:
 
 - retention time.
 </div>
-
 <div style="position:absolute; left:50%; top:70%">
 - LC-MS: analyze data along retention time.
 </div>
@@ -429,25 +432,28 @@ std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 <div>
 - Data stored in *mzML* files.
 </div>
+<div>
+- To load such data into *R*:
+</div>
 
-<div style="position:absolute; left:50px; top:270px;">
-<img src="images/mzR.png" width=100>
+<div style="position:absolute; left:45px; top:391px;">
+<img src="images/mzR.png" width=140>
 </div>
 
 <div>
-<div style="position:absolute; left:100px; top:183px;">
-<img src="images/MSnbase.png" width=100>
+<div style="position:absolute; left:115px; top:270px;">
+<img src="images/MSnbase.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:220px;">
+<div style="position:absolute; left:29%; top:335px;">
 `ms <- readMSData(fl, mode = "onDisk")`
 </div>
 </div>
 
 <div>
-<div style="position:absolute; left:100px; top:357px;">
-<img src="images/Spectra.png" width=100>
+<div style="position:absolute; left:115px; top:513px;">
+<img src="images/Spectra.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:400px;">
+<div style="position:absolute; left:29%; top:580px;">
 `sps <- Spectra(fl, backend = MsBackendMzR())`
 </div>
 </div>
@@ -458,19 +464,19 @@ std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 <div>
 - Untargeted metabolomics (label-free proteomics).
 
-<div style="position:absolute; left:50px; top:270px;">
-<img src="images/mzR.png" width=100>
+<div style="position:absolute; left:45px; top:307px;">
+<img src="images/mzR.png" width=140>
 </div>
 
-<div style="position:absolute; left:100px; top:183px;">
-<img src="images/MSnbase.png" width=100>
+<div style="position:absolute; left:115px; top:185px;">
+<img src="images/MSnbase.png" width=140>
 </div>
 </div>
 <div>
-<div style="position:absolute; left:200px; top:183px;">
-<img src="images/xcms.png" width=100>
+<div style="position:absolute; left:254px; top:185px;">
+<img src="images/xcms.png" width=140>
 </div>
-<div style="position:absolute; left:35%; top:220px;">
+<div style="position:absolute; left:45%; top:250px;">
 - LC-MS preprocessing:
 </div>
 </div>
@@ -479,17 +485,17 @@ std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 
 - Untargeted metabolomics (label-free proteomics).
 
-<div style="position:absolute; left:50px; top:270px;">
-<img src="images/mzR.png" width=100>
+<div style="position:absolute; left:45px; top:307px;">
+<img src="images/mzR.png" width=140>
 </div>
 
-<div style="position:absolute; left:100px; top:183px;">
-<img src="images/MSnbase.png" width=100>
+<div style="position:absolute; left:115px; top:185px;">
+<img src="images/MSnbase.png" width=140>
 </div>
-<div style="position:absolute; left:200px; top:183px;">
-<img src="images/xcms.png" width=100>
+<div style="position:absolute; left:254px; top:185px;">
+<img src="images/xcms.png" width=140>
 </div>
-<div style="position:absolute; left:35%; top:220px;">
+<div style="position:absolute; left:45%; top:250px;">
 - LC-MS preprocessing:
   - chromatographic peak detection
 </div>
@@ -502,17 +508,17 @@ std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 
 - Untargeted metabolomics (label-free proteomics).
 
-<div style="position:absolute; left:50px; top:270px;">
-<img src="images/mzR.png" width=100>
+<div style="position:absolute; left:45px; top:307px;">
+<img src="images/mzR.png" width=140>
 </div>
 
-<div style="position:absolute; left:100px; top:183px;">
-<img src="images/MSnbase.png" width=100>
+<div style="position:absolute; left:115px; top:185px;">
+<img src="images/MSnbase.png" width=140>
 </div>
-<div style="position:absolute; left:200px; top:183px;">
-<img src="images/xcms.png" width=100>
+<div style="position:absolute; left:254px; top:185px;">
+<img src="images/xcms.png" width=140>
 </div>
-<div style="position:absolute; left:35%; top:220px;">
+<div style="position:absolute; left:45%; top:250px;">
 - LC-MS preprocessing:
   - chromatographic peak detection
   - alignment
@@ -527,17 +533,17 @@ std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 <div>
 - Untargeted metabolomics (label-free proteomics).
 
-<div style="position:absolute; left:50px; top:270px;">
-<img src="images/mzR.png" width=100>
+<div style="position:absolute; left:45px; top:307px;">
+<img src="images/mzR.png" width=140>
 </div>
 
-<div style="position:absolute; left:100px; top:183px;">
-<img src="images/MSnbase.png" width=100>
+<div style="position:absolute; left:115px; top:185px;">
+<img src="images/MSnbase.png" width=140>
 </div>
-<div style="position:absolute; left:200px; top:183px;">
-<img src="images/xcms.png" width=100>
+<div style="position:absolute; left:254px; top:185px;">
+<img src="images/xcms.png" width=140>
 </div>
-<div style="position:absolute; left:35%; top:220px;">
+<div style="position:absolute; left:45%; top:250px;">
 - LC-MS preprocessing:
   - chromatographic peak detection
   - alignment
@@ -553,17 +559,17 @@ std_data <- refineChromPeaks(std_data, MergeNeighboringPeaksParam(expandRt = 3))
 <div>
 - Untargeted metabolomics (label-free proteomics).
 
-<div style="position:absolute; left:50px; top:270px;">
-<img src="images/mzR.png" width=100>
+<div style="position:absolute; left:45px; top:307px;">
+<img src="images/mzR.png" width=140>
 </div>
 
-<div style="position:absolute; left:100px; top:183px;">
-<img src="images/MSnbase.png" width=100>
+<div style="position:absolute; left:115px; top:185px;">
+<img src="images/MSnbase.png" width=140>
 </div>
-<div style="position:absolute; left:200px; top:183px;">
-<img src="images/xcms.png" width=100>
+<div style="position:absolute; left:254px; top:185px;">
+<img src="images/xcms.png" width=140>
 </div>
-<div style="position:absolute; left:35%; top:220px;">
+<div style="position:absolute; left:45%; top:250px;">
 - LC-MS preprocessing:
   - chromatographic peak detection
   - alignment
@@ -677,10 +683,12 @@ mtch <- matchValues(query, target,
 ```{r, echo = FALSE, results = "asis"}
 pandoc.table(cmps, style = "rmarkdown")
 ```
+</div>
 <div style="position:absolute; left:5%; top:50%">
+- Enprofylline: asthma treatment agent.
 - Compounds can have same formula - how to distinguish?
 </div>
-</div>
+
 
 ## A little additional complication {.notransition}
 
@@ -688,15 +696,16 @@ pandoc.table(cmps, style = "rmarkdown")
 pandoc.table(cmps, style = "rmarkdown")
 ```
 <div style="position:absolute; left:5%; top:50%">
+- Enprofylline: asthma treatment agent.
 - Compounds can have same formula - how to distinguish?
 - They differ by their structure.
 </div>
 
-<div style="position:absolute; left:150px; top:500px">
+<div style="position:absolute; left:150px; top:550px">
 <img src="images/caffeine.png" width = 150/>
 </div>
 
-<div style="position:absolute; left:500px; top:500px">
+<div style="position:absolute; left:500px; top:550px">
 <img src="images/enprofylline.png" width = 150/>
 </div>
 
@@ -724,16 +733,17 @@ mtch <- matchValues(query, target,
 ## Using MS2 spectra {.build}
 
 <div>
-- We can *fragment* ions to get some information on their structure:
+- We can *fragment* ions to get some information on their structure.
+</div>
+<div>
+- MS instrument selects ions for fragmentation and records MS2 spectrum.
+- LC-MS -> LC-MS/MS.
 </div>
 
 <div>
 <img src="images/fragment-spectra.png" width = 500>
 </div>
 
-<div>
-- Apply *collision energy* to fragment ions.
-</div>
 <div>
 - LC-MS/MS data: MS1 for quantification, MS2 for annotation.
 </div>
@@ -812,9 +822,6 @@ mtch <- matchSpectra(query, target,
 
 ## Workshops {.build}
 
-- Preprocessing:
-  [metabolomics2018](https://github.com/jorainer/metabolomics2018).
-
 <div>
 <div style="position:absolute; left:70px; top:230px;">
 <img src="images/Spectra.png" width=140>
@@ -836,3 +843,8 @@ annotation of untargeted metabolomics data.
 </div>
 
 
+## 
+
+<div style="position:absolute; top:48%; left:33%;">
+**Thank you for your attention**
+</div>
