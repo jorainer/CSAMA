@@ -38,6 +38,9 @@ slides > slide {
 
 </style>
 
+<!--
+To use presenter mode: append ?presentme=true
+-->
 
 ```{r setup, echo = FALSE, message = FALSE, warning = FALSE}
 packs <- c("hugene20sttranscriptcluster.db",
