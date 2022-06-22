@@ -47,6 +47,10 @@ fn <- paste0("file://", normalizePath("metabolomics.html"))
 rmdshot("metabolomics.Rmd", "metabolomics.pdf")
 -->
 
+<!--
+Use presenter mode: append ?presentme=true to the URL
+-->
+
 ## Content
 
 - Introduction to metabolomics
@@ -120,7 +124,7 @@ knitr::include_graphics("images/Glycolysis_12.png")
 ## Metabolomics? {.build}
 
 - Large-scale study of small molecules (metabolites) in a system (cell, tissue,
-  organism).
+  organism, ...).
 
 <div>
 ### Putting metabolomics into context:
@@ -414,7 +418,7 @@ We gain an additional dimension:
 </div>
 
 
-## Mass Spectrometry Data {.build}
+## Mass Spectrometry Data in *R*{.build}
 
 ```{r, echo = FALSE, message = FALSE}
 ## Run preprocessing on one file
@@ -605,7 +609,7 @@ fts
 
 
 - *LC-MS features* characterized by their *m/z* and retention time.
-- Need to *annotate* these to metabolites (compounds).
+- **Goal**: *annotate* these features to metabolites (compounds).
 
 <div style="position:absolute; left:15%; top:60%; font-size:50%;">
 ```{r, echo = FALSE, message = FALSE}
@@ -677,6 +681,33 @@ mtch <- matchValues(query, target,
 </div>
 
 
+## Annotation using *m/z* values {.notransition}
+
+```{r, echo = FALSE, results = "asis"}
+pandoc.table(cmps[1, ], style = "rmarkdown")
+```
+
+<div style="position:absolute; left:5%; top:40%">
+- Molecule not charged. Can not be detected with MS.
+- Electro spray ionization: create ions, potentially multiple.
+- Match measured *m/z* against these reference values.
+</div>
+
+<div style="position:absolute; left:50px; top:450px;">
+<img src="images/MetaboAnnotation.png" width=140>
+</div>
+<div style="position:absolute; left:25%; top:492px;">
+```{r, eval = FALSE}
+mtch <- matchValues(query, target,
+                    Mass2MzParam(c("[M+H]+", "[M+Na]+")))
+```
+</div>
+
+<div style="position:absolute; left:5%; top:84%;">
+- `query`: experimental *m/z* values.
+- `target`: reference masses.
+</div>
+
 ## A little additional complication {.build}
 
 <div>
@@ -709,6 +740,7 @@ pandoc.table(cmps, style = "rmarkdown")
 <img src="images/enprofylline.png" width = 150/>
 </div>
 
+
 ## Using *m/z* **and** retention time {.build}
 
 - Structure can have an influence on the polarity of compounds and thus they
@@ -728,6 +760,7 @@ mtch <- matchValues(query, target,
 </div>
 
 - Requires that we do have **reference** retention times available.
+- These are instrument set-up/lab-specific.
 
 
 ## Using MS2 spectra {.build}
@@ -736,12 +769,12 @@ mtch <- matchValues(query, target,
 - We can *fragment* ions to get some information on their structure.
 </div>
 <div>
-- MS instrument selects ions for fragmentation and records MS2 spectrum.
 - LC-MS -> LC-MS/MS.
+- MS instrument selects ions for fragmentation and records MS2 spectrum.
 </div>
 
 <div>
-<img src="images/fragment-spectra.png" width = 500>
+<img src="images/fragment-spectra.png" width = 600>
 </div>
 
 <div>
@@ -753,23 +786,21 @@ mtch <- matchValues(query, target,
 
 - If we have MS2 spectra associated to features, we can match them against
   *reference* spectra.
+- Calculate similarity scores and compare spectra.
 
-```{r, echo = FALSE, message = FALSE}
+```{r, echo = FALSE, message = FALSE, fig.width = 6, fig.height = 4}
 library(MsBackendMgf)
 sps <- Spectra("data/caffeine.mgf", source = MsBackendMgf())
 plotSpectraMirror(sps[1], sps[2], ppm = 70)
 ```
 
-## Using MS2 spectra {.notransition}
-
-- If we have MS2 spectra associated to features, we can match them against
-  *reference* spectra.
+## Spectra similarity calculation in *R* {.build}
 
 <div>
-<div style="position:absolute; left:50px; top:300px;">
+<div style="position:absolute; left:50px; top:120px;">
 <img src="images/Spectra.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:358px;">
+<div style="position:absolute; left:25%; top:178px;">
 ```{r, eval = FALSE}
 simmat <- compareSpectra(a, b)
 ```
@@ -777,10 +808,10 @@ simmat <- compareSpectra(a, b)
 </div>
 
 <div>
-<div style="position:absolute; left:50px; top:470px;">
+<div style="position:absolute; left:50px; top:290px;">
 <img src="images/MetaboAnnotation.png" width=140>
 </div>
-<div style="position:absolute; left:25%; top:513px;">
+<div style="position:absolute; left:25%; top:333px;">
 ```{r, eval = FALSE}
 mtch <- matchSpectra(query, target,
                      CompareSpectraParam())
@@ -788,36 +819,15 @@ mtch <- matchSpectra(query, target,
 </div>
 </div>
 
-
-## Using MS2 spectra {.notransition}
-
-- If we have MS2 spectra associated to features, we can match them against
-  *reference* spectra.
-
-<div>
-<div style="position:absolute; left:50px; top:300px;">
-<img src="images/Spectra.png" width=140>
-</div>
-<div style="position:absolute; left:25%; top:358px;">
-```{r, eval = FALSE}
-simmat <- compareSpectra(a, b)
-```
-</div>
+<div style="position:absolute; left:50px; top:480px;">
+[*SpectriPy*](https://github.com/RforMassSpectrometry/SpectriPy): integrate
+python MS libraries (*matchms*, *MS2DeepScore*) into *Spectra*-based workflows.
 </div>
 
-<div>
-<div style="position:absolute; left:50px; top:470px;">
-<img src="images/MetaboAnnotation.png" width=140>
+<div style="position:absolute; left:50px; top:580px;">
+- **Limitation**: availability of reference spectra.
+- Public reference databases are growing, collecting data shared by researchers.
 </div>
-<div style="position:absolute; left:25%; top:513px;">
-```{r, eval = FALSE}
-mtch <- matchSpectra(query, target,
-                     CompareSpectraParam())
-```
-</div>
-</div>
-
-- Problem: availability of reference spectra.
 
 
 ## Workshops {.build}
@@ -828,7 +838,7 @@ mtch <- matchSpectra(query, target,
 </div>
 <div style="position:absolute; left:25%; top:279px;">
 [`SpectraTutorials`](https://github.com/jorainer/SpectraTutorials): 
-introduction to MS data handling and processing using `Spectra`.
+introduction to MS data handling and processing using *Spectra*.
 </div>
 </div>
 
@@ -841,6 +851,10 @@ introduction to MS data handling and processing using `Spectra`.
 annotation of untargeted metabolomics data.
 </div>
 </div>
+
+<div style="position:absolute; left:70px; top:600px;">
+[Info on workshops](https://github.com/Bioconductor/CSAMA)
+<div>
 
 
 ## 
