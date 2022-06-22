@@ -266,11 +266,11 @@ mapIds(org.Hs.eg.db, brca, "OMIM", "SYMBOL", multiVals = "CharacterList")
 - *AnnotationDbi* is a very powerful framework, but:
 </div>
 <div>
-- For some annotations or queries different approaches might be more suitable.
-</div>
-<div>
 - Not guaranteed that all annotation packages/objects support the
   *AnnotationDbi* framework.
+</div>
+<div>
+- For some annotations or queries different approaches might be more suitable.
 </div>
 
 
@@ -283,7 +283,7 @@ mapIds(org.Hs.eg.db, brca, "OMIM", "SYMBOL", multiVals = "CharacterList")
 - Annotation for positions along protein sequences (protein domains...).
 </div>
 <div>
-- Mostly used for gene quantification in RNA-seq data.
+- Used for RNA-seq (gene quantitation), ChIP-Seq, ... data.
 </div>
 
 
